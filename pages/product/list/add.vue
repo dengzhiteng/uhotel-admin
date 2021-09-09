@@ -1,33 +1,69 @@
 <template>
 	<view class="uni-container">
-		<uni-forms ref="form" v-model="formData"  validateTrigger="bind" @submit="submit">
+		<uni-forms ref="form" v-model="formData" validateTrigger="bind" @submit="submit">
+			<uni-forms-item name="category_id" label="类别" required>
+				<uni-easyinput v-model="formData.category_id" placeholder="请输入" />
+			</uni-forms-item>
 			<uni-forms-item name="goods_name" label="商品名称" required>
-				<uni-easyinput v-model="formData.goods_name"  placeholder="请输入商品名称" />
+				<uni-easyinput v-model="formData.goods_name" placeholder="请输入" />
 			</uni-forms-item>
+			<uni-forms-item name="keywords" label="关键字">
+				<uni-easyinput v-model="formData.keywords" placeholder="请输入" />
+			</uni-forms-item>
+			<uni-forms-item name="goods_desc" label="商品描述">
+				<uni-easyinput v-model="formData.goods_desc" placeholder="请输入" />
+			</uni-forms-item>
+
 			<uni-forms-item name="price" label="商品价格" required>
-				<uni-easyinput v-model="formData.price"  placeholder="请输入商品价格" />
+				<uni-easyinput v-model="formData.price" placeholder="请输入" />
 			</uni-forms-item>
-			<uni-forms-item name="discount" label="商品折扣" >
-				<uni-easyinput v-model="formData.discount"  placeholder="请输入商品折扣" />
+			<uni-forms-item name="cost" label="商品成本">
+				<uni-easyinput v-model="formData.cost" placeholder="请输入" />
+			</uni-forms-item>
+			<uni-forms-item name="discount" label="商品折扣">
+				<uni-easyinput v-model="formData.discount" placeholder="请输入" />
+			</uni-forms-item>
+
+			<uni-forms-item name="remain_count" label="库存数量">
+				<uni-easyinput v-model="formData.remain_count" placeholder="请输入" />
+			</uni-forms-item>
+			<uni-forms-item name="month_sell_count" label="月销量">
+				<uni-easyinput v-model="formData.month_sell_count" placeholder="请输入" />
+			</uni-forms-item>
+			
+			<uni-forms-item name="remark" label="商品备注">	
+				<uni-easyinput v-model="formData.remark" placeholder="请输入" />
+			</uni-forms-item>
+
+			<uni-forms-item name="is_on_sale" label="是否上架">
+				<switch :checked="formData.is_on_sale" />
+			</uni-forms-item>
+			<uni-forms-item name="is_new" label="是否新品">
+				<switch :checked="formData.is_new" />
+			</uni-forms-item>
+			<uni-forms-item name="is_hot" label="是否热销">
+				<switch :checked="formData.is_hot" />
 			</uni-forms-item>
 		
-			<view class="uni-button-group">
-				<button  type="primary" class="uni-button" @click="submitForm">保存</button>
-				<button class="uni-button">重置</button>
-			</view>
 		</uni-forms>
+		<view class="uni-button-group">
+			<button type="primary" class="uni-button" @click="submitForm">保存</button>
+			<button class="uni-button">重置</button>
+		</view>
 	</view>
 </template>
 
 <script>
-	import {validator} from '@/js_sdk/validator/uni-product-add.js';
+	import {
+		validator
+	} from '@/js_sdk/validator/uni-product-add.js';
 	export default {
 		data() {
 			return {
 				formData: {
-					goods_name : "",
-					price : "",
-					discount : "",
+					goods_name: "",
+					price: "",
+					discount: "",
 				},
 			}
 		},
@@ -54,15 +90,26 @@
 					mask: true
 				})
 				const db = uniCloud.database();
-				const collection = db.collection('product-list').add({...value,category_id:'sfsdf'}).then(res=>{
-					if(res.result.code==0){
-						setTimeout(()=>{
-							uni.hideLoading()
+				const collection = db.collection('product-list').add({
+					...value,
+					category_id: 'sfsdf'
+				}).then(res => {
+					if (res.result.code == 0) {
+						setTimeout(() => {
 							uni.showToast({
-								title:"新增成功"
+								title: "新增成功"
 							})
-						},1000)
+						}, 1000)
+					} else {
+
 					}
+				}).catch(err => {
+					console.log(err)
+					uni.showToast({
+						title: err
+					})
+				}).finally(res1 => {
+					uni.hideLoading()
 				})
 			},
 		}
@@ -70,13 +117,30 @@
 </script>
 <style lang="scss" scoped>
 	::v-deep .uni-forms-item__label {
-		width: 100px !important;
+		width: 90px !important;
+		text-align: right;
 	}
-	
-	.uni-button-group{
-		button{
+
+	.uni-button-group {
+		button {
 			width: 100px;
 			margin-right: 20px;
 		}
+	}
+
+	::v-deep .uni-forms {
+		max-width: 80% !important;
+		overflow: hidden;margin: auto;
+	}
+
+	.uni-forms .uni-forms-item {
+		width: 400px;
+		float: left;
+		margin-right: 20px;
+	}
+
+	.uni-button-group {
+		max-width: 80%;
+		margin: auto;
 	}
 </style>
