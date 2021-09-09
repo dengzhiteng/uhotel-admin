@@ -3,10 +3,15 @@ import store from './store'
 import plugin from './js_sdk/uni-admin/plugin'
 import messages from './i18n/index.js'
 
+import elementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+
 // #ifndef VUE3
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 Vue.config.productionTip = false
+
+Vue.use(elementUI);
 Vue.use(VueI18n)
 // 通过选项创建 VueI18n 实例
 const i18n = new VueI18n({

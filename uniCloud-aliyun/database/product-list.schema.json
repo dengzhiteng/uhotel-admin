@@ -1,11 +1,11 @@
 {
 	"bsonType": "object",
-	"required": ["category_id", "goods_sn", "goods_name", "price"],
+	"required": ["category_id", "goods_name"],
 	"permission": {
 		"read": true,
-		"create": false,
-		"update": false,
-		"delete": false
+		"create": true,
+		"update": true,
+		"delete": true
 	},
 	"properties": {
 		"_id": {
@@ -15,6 +15,12 @@
 			"bsonType": "string",
 			"description": "分类 id，参考`opendb-mall-categories`表",
 			"foreignKey": "opendb-mall-categories._id"
+		},
+		"category": {
+			"bsonType": "string",
+			"description": "类别",
+			"title": "类别",
+			"trim": "both"
 		},
 		"goods_sn": {
 			"bsonType": "string",
@@ -30,23 +36,17 @@
 		},
 		"price": {
 			"description": "菜品价格",
-			"bsonType": "int",
 			"title": "菜品价格",
-			"order": 4,
 			"trim": "both",
 			"defaultValue": 0
 		},
 		"discount": {
 			"description": "菜品折扣",
-			"bsonType": "int",
 			"title": "菜品折扣",
-			"order": 5,
-			"trim": "both",
-			"defaultValue": 9.99
+			"trim": "both"
 		},
 		"score": {
 			"description": "菜品评分",
-			"bsonType": "int",
 			"title": "菜品评分",
 			"order": 6,
 			"trim": "both",
@@ -54,7 +54,6 @@
 		},
 		"hot": {
 			"description": "本店热度",
-			"bsonType": "int",
 			"title": "本店热度",
 			"order": 7,
 			"trim": "both",

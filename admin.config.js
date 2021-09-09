@@ -28,9 +28,11 @@ export default {
 			}]
 		}
 	},
-	sideBar: { // 左侧菜单
+	sideBar: { 
+		// 左侧菜单
 		// 配置静态菜单列表（放置在用户被授权的菜单列表下边）
-		staticMenu: [{
+		staticMenu: [
+			{
 				menu_id: "demo",
 				text: '静态功能演示',
 				icon: 'uni-icons-list',
@@ -48,23 +50,68 @@ export default {
 				}]
 			},
 			{
-				menu_id: "goods",
+				menu_id: "product",
 				text: '商品管理',
-				icon: 'uni-icons-cart',
-				children: [{
+				icon: 'uni-icons-home',
+				children: [
+					{
+						menu_id: "icons1",
+						text: '商品列表',
+						value: '/pages/product/list/index',
+					},
+					
+					{
 						menu_id: "icons2",
-						text: '新增',
-						value: '/pages/system/role/add',
+						text: '订单中心',
+						value: '/pages/product/supply/index',
+					},				
+					{
+						menu_id: "icons2",
+						text: '供应商管理',
+						value: '/pages/product/order/index',
+					},
+				
+				],
+			},
+			{
+				menu_id: "user",
+				text: '统计',
+				icon:"uni-icons-shop",
+				children: [
+					{
+						menu_id: "icons2",
+						text: '销售数据',
 					},
 					{
-						menu_id: "icons1",
-						text: '编辑',
-						value: '/pages/system/role/edit',
+						menu_id: "icons2",
+						text: '商品分析',
 					},
 					{
-						menu_id: "icons1",
-						text: '列表',
-						value: '/pages/system/role/list',
+						menu_id: "icons2",
+						text: '用户数据统计',
+					},
+					{
+						menu_id: "icons2",
+						text: '留言反馈',
+					},
+				]
+			},
+			{
+				menu_id: "user",
+				text: '费用',
+				icon:"uni-icons-map",
+				children: [
+					{
+						menu_id: "icons2",
+						text: '商品费用',
+					},
+					{
+						menu_id: "icons2",
+						text: '员工工资',
+					},
+					{
+						menu_id: "icons2",
+						text: '水电等杂项',
 					},
 				]
 			},
@@ -72,36 +119,10 @@ export default {
 				menu_id: "system",
 				text: '管理员',
 				icon: 'uni-icons-person-filled',
-				url: "",
 				children: [{
-						menu_id: "icons2",
-						text: '新增',
-						value: '/pages/system/user/add',
-					},
-					{
-						menu_id: "icons1",
-						text: '编辑',
-						value: '/pages/system/user/edit',
-					},
-					{
 						menu_id: "icons1",
 						text: '用户列表',
 						value: '/pages/system/user/list',
-					},
-				]
-			}, {
-				menu_id: "system",
-				text: '角色管理',
-				icon: 'uni-icons-locked',
-				children: [{
-						menu_id: "icons2",
-						text: '新增',
-						value: '/pages/system/role/add',
-					},
-					{
-						menu_id: "icons1",
-						text: '编辑',
-						value: '/pages/system/role/edit',
 					},
 					{
 						menu_id: "icons1",
@@ -109,38 +130,6 @@ export default {
 						value: '/pages/system/role/list',
 					},
 				]
-			},
-			{
-				menu_id: "user",
-				text: '用户中心',
-				children: [{
-						menu_id: "icons2",
-						text: '留言反馈',
-					},
-
-				]
-			},
-			{
-				menu_id: "tongji",
-				text: '数据统计',
-				children: [
-					{
-					menu_id: "icons2",
-					text: '销售数据',
-				},
-				{
-					menu_id: "icons2",
-					text: '用户数据统计',
-				},
-				]
-			},
-			{
-				menu_id: "tongji",
-				text: '订单中心',
-				children: [{
-					menu_id: "icons2",
-					text: '销售数据',
-				}]
 			},
 		]
 	}
