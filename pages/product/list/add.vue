@@ -30,8 +30,8 @@
 			<uni-forms-item name="month_sell_count" label="月销量">
 				<uni-easyinput v-model="formData.month_sell_count" placeholder="请输入" />
 			</uni-forms-item>
-			
-			<uni-forms-item name="remark" label="商品备注">	
+
+			<uni-forms-item name="remark" label="商品备注">
 				<uni-easyinput v-model="formData.remark" placeholder="请输入" />
 			</uni-forms-item>
 
@@ -44,7 +44,12 @@
 			<uni-forms-item name="is_hot" label="是否热销">
 				<switch :checked="formData.is_hot" />
 			</uni-forms-item>
-		
+			<uni-forms-item name="goods_thumb" label="商品封面">
+				<uni-file-picker v-model="formData.goods_thumb" fileMediatype="image" mode="grid" @success="successThumb"  @fail="fail"  @delete="deleteFile" />
+			</uni-forms-item>	
+			<uni-forms-item  name="goods_banner_imgs" label="商品图片">
+				<uni-file-picker v-model="formData.goods_banner_imgs" fileMediatype="image" mode="grid" @success="successBanner"  @fail="fail"  @delete="deleteFile" />
+			</uni-forms-item>	
 		</uni-forms>
 		<view class="uni-button-group">
 			<button type="primary" class="uni-button" @click="submitForm">保存</button>
@@ -64,10 +69,40 @@
 					goods_name: "",
 					price: "",
 					discount: "",
+					goods_banner_imgs:[],
+					goods_thumb:[]
 				},
 			}
 		},
 		methods: {
+			// 上传成功
+			successBanner(e) {
+				let imgs =  Array.isArray(e.tempFilePaths)?e.tempFilePaths:[e.tempFilePaths];
+				imgs = new Set(imgs)
+				this.formData.goods_banner_imgs = [...imgs]
+				uni.showToast({
+					title:'上传成功'
+				})
+			},
+			successThumb(e) {
+				let imgs =  Array.isArray(e.tempFilePaths)?e.tempFilePaths:[e.tempFilePaths];
+				imgs = new Set(imgs)
+				this.formData.goods_thumb =  [...imgs]
+				console.log(this.formData.goods_thumb)
+				uni.showToast({
+					title:'上传成功'
+				})
+			},
+			// 上传失败
+			fail(e) {
+				uni.showToast({
+					title:'上传失败'
+				})
+			},
+			// 删除图片
+			deleteFile(e){
+				console.log(e)
+			},
 			/**
 			 * 触发表单提交
 			 */
@@ -130,7 +165,8 @@
 
 	::v-deep .uni-forms {
 		max-width: 80% !important;
-		overflow: hidden;margin: auto;
+		overflow: hidden;
+		margin: auto;
 	}
 
 	.uni-forms .uni-forms-item {

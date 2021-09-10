@@ -40,7 +40,7 @@
 						<uni-th align="center">是否上架</uni-th>
 						<uni-th align="center">是否热销</uni-th>
 
-						<uni-th align="center">操作</uni-th>
+						<uni-th align="center" >操作</uni-th>
 					</uni-tr>
 
 					<uni-tr v-for="(item,index) in data" :key="index">
